@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>For My Love ❤️</title>
+
+
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+
+
+  <style>
+
+    * {
+
+      box-sizing: border-box;
+
+      font-family: 'Poppins', sans-serif;
+
+    }
+
+
+
+    body {
+
+      margin: 0;
+
+      min-height: 100vh;
+
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      text-align: center;
+
+      color: #fff;
+
+      overflow: hidden;
+
+    }
+
+
+
+    .card {
+
+      background: rgba(255, 255, 255, 0.15);
+
+      backdrop-filter: blur(10px);
+
+      border-radius: 20px;
+
+      padding: 40px 30px;
+
+      width: 90%;
+
+      max-width: 400px;
+
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+
+      animation: fadeIn 1s ease;
+
+    }
+
+
+
+    h1 {
+
+      margin-bottom: 15px;
+
+      font-size: 28px;
+
+    }
+
+
+
+    p {
+
+      font-size: 16px;
+
+      margin-bottom: 25px;
+
+    }
+
+
+
+    .btn-group {
+
+      display: flex;
+
+      justify-content: center;
+
+      gap: 20px;
+
+    }
+
+
+
+    button {
+
+      border: none;
+
+      padding: 12px 24px;
+
+      border-radius: 25px;
+
+      font-size: 16px;
+
+      cursor: pointer;
+
+      transition: 0.3s ease;
+
+    }
+
+
+
+    .yes-btn {
+
+      background: #ff4d6d;
+
+      color: #fff;
+
+    }
+
+
+
+    .yes-btn:hover {
+
+      background: #ff1f4a;
+
+      transform: scale(1.05);
+
+    }
+
+
+
+    .no-btn {
+
+      background: #fff;
+
+      color: #ff4d6d;
+
+      position: relative;
+
+    }
+
+
+
+    .no-btn:hover {
+
+      background: #ffe3e8;
+
+    }
+
+
+
+    .hidden {
+
+      display: none;
+
+    }
+
+
+
+    .hearts {
+
+      position: fixed;
+
+      top: 0;
+
+      left: 0;
+
+      width: 100%;
+
+      height: 100%;
+
+      pointer-events: none;
+
+      overflow: hidden;
+
+    }
+
+
+
+    .heart {
+
+      position: absolute;
+
+      color: #ff4d6d;
+
+      font-size: 20px;
+
+      animation: float 6s linear infinite;
+
+      opacity: 0.8;
+
+    }
+
+
+
+    @keyframes fadeIn {
+
+      from { opacity: 0; transform: scale(0.9); }
+
+      to { opacity: 1; transform: scale(1); }
+
+    }
+
+
+
+    @keyframes float {
+
+      from {
+
+        transform: translateY(100vh) scale(1);
+
+        opacity: 1;
+
+      }
+
+      to {
+
+        transform: translateY(-10vh) scale(1.5);
+
+        opacity: 0;
+
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+
+<body>
+
+
+
+  <div class="hearts" id="hearts"></div>
+
+
+
+  <div class="card" id="card">
+
+    <h1 id="question">mrs sandhu❤️</h1>
+
+    <p id="message">Do you know how much i love you🥺?</p>
+
+
+
+    <div class="btn-group" id="buttons">
+
+      <button class="yes-btn" onclick="nextStep(true)">Yes</button>
+
+      <button class="no-btn" onclick="nextStep(false)">No</button>
+
+    </div>
+
+  </div>
+
+
+
+  <script>
+
+
+
+    const questions = [
+
+      "Do you know how much i love you🥺?",
+
+      "Do you know how much I care about you?",
+
+      "Will you always stay with me?",
+
+      "Will you be my Valentine forever? ❤️"
+
+    ];
+
+
+
+    let step = 0;
+
+
+
+    const questionEl = document.getElementById("question");
+
+    const messageEl = document.getElementById("message");
+
+    const buttonsEl = document.getElementById("buttons");
+
+    const heartsEl = document.getElementById("hearts");
+
+
+
+    function nextStep(answer) {
+
+
+
+      if (!answer) {
+
+        moveNoButton();
+
+        return;
+
+      }
+
+
+
+      step++;
+
+
+
+      if (step < questions.length) {
+
+        messageEl.innerText = questions[step];
+
+      } else {
+
+        showLoveMessage();
+
+      }
+
+    }
+
+
+
+    function moveNoButton() {
+
+      const btn = document.querySelector(".no-btn");
+
+
+
+      const x = Math.random() * 200 - 100;
+
+      const y = Math.random() * 200 - 100;
+
+
+
+      btn.style.transform = `translate(${x}px, ${y}px)`;
+
+    }
+
+
+
+    function showLoveMessage() {
+
+      questionEl.innerText = "I Love You❤";
+
+      messageEl.innerText = "Putt,You are my everything. Will you be mine forever? 💖";
+
+      buttonsEl.style.display = "none";
+
+
+
+      createHearts();
+
+    }
+
+
+
+    function createHearts() {
+
+
+
+      setInterval(() => {
+
+
+
+        const heart = document.createElement("div");
+
+        heart.classList.add("heart");
+
+        heart.innerText = "❤️";
+
+
+
+        heart.style.left = Math.random() * 100 + "vw";
+
+        heart.style.fontSize = Math.random() * 20 + 15 + "px";
+
+        heart.style.animationDuration = Math.random() * 3 + 4 + "s";
+
+
+
+        heartsEl.appendChild(heart);
+
+
+
+        setTimeout(() => {
+
+          heart.remove();
+
+        }, 6000);
+
+
+
+      }, 300);
+
+
+
+    }
+
+
+
+  </script>
+
+
+
+</body>
+
+</html>
+
+
+
